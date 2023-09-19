@@ -56,6 +56,12 @@ public class DepartmentServiceImpl implements DepartmentService {
         departmentRepository.delete(department);
     }
 
+    @Override
+    public DepartmentDto getDepartmentByCode(String code) {
+        Department department = departmentRepository.findByDepartmentCode(code);
+        return modelMapper.map(department, DepartmentDto.class);
+    }
+
     private Department getDepartmentById(Long departmentId) {
         return departmentRepository.findById(departmentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Department", "id", departmentId));
