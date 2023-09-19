@@ -59,11 +59,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public DepartmentDto getDepartmentByCode(String code) {
         Department department = departmentRepository.findByDepartmentCode(code);
+        if(department == null) {
+            throw new ResourceNotFoundException("Department", "code", code);
+        }
         return modelMapper.map(department, DepartmentDto.class);
     }
 
     private Department getDepartmentById(Long departmentId) {
         return departmentRepository.findById(departmentId)
-                .orElseThrow(() -> new ResourceNotFoundException("Department", "id", departmentId));
+                .orElseThrow(() -> new ResourceNotFoundException("Department", "id", Long.toString(departmentId)));
     }
 }
