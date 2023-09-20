@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="true">
-    <exclude-output />
-    <content url="file://$MODULE_DIR$" />
-    <orderEntry type="inheritedJdk" />
-    <orderEntry type="sourceFolder" forTests="false" />
-  </component>
+<module version="4">
   <component name="SonarLintModuleSettings">
-    <option name="uniqueId" value="1ffa53ef-f2d9-40a7-8fb0-4d108f55f16d" />
+    <option name="uniqueId" value="f1fb2d01-b7f1-40dc-8f4f-2fad9c488ba9" />
   </component>
 </module>
