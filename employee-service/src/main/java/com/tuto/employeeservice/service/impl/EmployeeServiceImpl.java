@@ -3,6 +3,7 @@ package com.tuto.employeeservice.service.impl;
 import com.tuto.employeeservice.dto.APIResponseDto;
 import com.tuto.employeeservice.dto.DepartmentDto;
 import com.tuto.employeeservice.dto.EmployeeDto;
+import com.tuto.employeeservice.dto.OrganizationDto;
 import com.tuto.employeeservice.entity.Employee;
 import com.tuto.employeeservice.exception.ResourceNotFoundException;
 import com.tuto.employeeservice.repository.EmployeeRepository;
@@ -70,9 +71,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         //DepartmentDto departmentDto = apiClient.getDepartmentByCode(employee.getDepartmentCode());
 
+        OrganizationDto organizationDto = webClient.get()
+                .uri("http://localhost:8083/api/organizations/" + employee.getOrganizationCode())
+                .retrieve()
+                .bodyToMono(OrganizationDto.class)
+                .block();
+
         APIResponseDto apiResponseDto = new APIResponseDto();
         apiResponseDto.setEmployeeDto(modelMapper.map(employee, EmployeeDto.class));
         apiResponseDto.setDepartment(departmentDto);
+        apiResponseDto.setOrganization(organizationDto);
 
         return apiResponseDto;
     }
