@@ -18,11 +18,14 @@ public class EmployeeRepositoryTests {
     private EmployeeRepository employeeRepository;
     private Employee employee;
 
+    @BeforeEach
+    public void setup() {
+        employee = createEmployee();
+    }
+
     //Junit test for save employee operation
     @Test
     public void givenEmployeeObject_whenSave_thenReturnSavedEmployee() {
-        //given - precondition or setup
-        Employee employee = createEmployee();
 
         //when - action or the behavior that e are going to test
         Employee savedEmployee = employeeRepository.save(employee);
@@ -34,7 +37,6 @@ public class EmployeeRepositoryTests {
 
     @Test
     public void givenEmployees_whenFindAll_thenReturnListOfAllEmployees() {
-        Employee employee = createEmployee();
         Employee employee1 = createEmployee();
         //email should be unique
         employee1.setEmail("john@wick.com");
@@ -50,7 +52,6 @@ public class EmployeeRepositoryTests {
 
     @Test
     public void givenEmployee_whenFindById_thenReturnEmployee() {
-        Employee employee = createEmployee();
         employeeRepository.save(employee);
         Employee savedEmployee = employeeRepository.findById(employee.getId()).get();
 
@@ -60,7 +61,6 @@ public class EmployeeRepositoryTests {
 
     @Test
     public void givenEmployeeEmail_whenFindByEmail_thenReturnEmployee() {
-        Employee employee = createEmployee();
         employeeRepository.save(employee);
         Employee savedEmployee = employeeRepository.findByEmail("wick@mail.com").get();
 
@@ -70,7 +70,6 @@ public class EmployeeRepositoryTests {
 
     @Test
     public void givenEmployee_whenUpdateEmployee_thenReturnUpdatedEmployee() {
-        Employee employee = createEmployee();
         employeeRepository.save(employee);
 
         Employee savedEmployee = employeeRepository.findById(employee.getId()).get();
@@ -89,7 +88,6 @@ public class EmployeeRepositoryTests {
 
     @Test
     public void givenEmployee_whenDelete_thenRemoveEmployee() {
-        Employee employee = createEmployee();
         employeeRepository.save(employee);
 
         employeeRepository.delete(employee);
@@ -101,7 +99,6 @@ public class EmployeeRepositoryTests {
 
     @Test
     public void givenFirstNameAndLastName_whenFindByJPQL_thenReturnEmployee() {
-        Employee employee = createEmployee();
         employeeRepository.save(employee);
 
         String firstName = "ramesh";
@@ -116,7 +113,6 @@ public class EmployeeRepositoryTests {
 
     @Test
     public void givenFirstNameAndLastName_whenFindByJpqlNamedParams_thenReturnEmployee() {
-        Employee employee = createEmployee();
         employeeRepository.save(employee);
 
         String firstName = "ramesh";
@@ -131,7 +127,6 @@ public class EmployeeRepositoryTests {
 
     @Test
     public void givenFirstNameAndLastName_whenFindByNativeSQL_thenReturnEmployee() {
-        Employee employee = createEmployee();
         employeeRepository.save(employee);
 
         Employee savedEmployee = employeeRepository.findbyNativeSQL(employee.getFirstName(), employee.getLastName());
@@ -143,7 +138,6 @@ public class EmployeeRepositoryTests {
 
     @Test
     public void givenFirstNameAndLastName_whenFindByNativeSQLNamedPArams_thenReturnEmployee() {
-        Employee employee = createEmployee();
         employeeRepository.save(employee);
 
         Employee savedEmployee = employeeRepository.findbyNativeSQLNamedParams(employee.getFirstName(), employee.getLastName());
